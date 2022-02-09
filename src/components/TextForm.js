@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 function TextForm(props) {
-  const [data, setData] = useState("Enter text");
+  const [data, setData] = useState("");
 
   const handleChange = (e) => {
     setData(e.target.value);
@@ -48,8 +48,13 @@ function TextForm(props) {
       <div className="Container">
         <h2>Text summary</h2>
         <p>
-          Total words : {data.split(" ").length} and total characters:{" "}
-          {data.length}
+          Total words :
+          {
+            data.split(" ").filter((element) => {
+              return element.length !== 0;
+            }).length
+          }{" "}
+          and total characters: {data.length}
         </p>
       </div>
     </>
