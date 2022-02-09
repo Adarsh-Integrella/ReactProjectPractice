@@ -4,6 +4,8 @@ import { useState } from "react";
 import NavBar from "./components/NavBar";
 import TextForm from "./components/TextForm";
 import Alert from "./components/Alert";
+import { Route, Routes, BrowserRouter, Link } from "react-router-dom";
+import About from "./components/About";
 
 function App() {
   const [alert, setAlert] = useState(null);
@@ -18,13 +20,27 @@ function App() {
     }, 1500);
   };
   return (
-    <div>
-      <NavBar title="ProjectOne" />
-      <Alert alert={alert} />
-      <div className="container">
-        <TextForm showAlert={showAlert} heading="Enter a text to anaylze" />
-      </div>
-    </div>
+    <>
+      <BrowserRouter>
+        <NavBar title="ProjectOne" />
+        <Alert alert={alert} />
+        <div className="container">
+          <Routes>
+            <Route
+              exact
+              path="/"
+              element={
+                <TextForm
+                  showAlert={showAlert}
+                  heading="Enter a text to anaylze"
+                />
+              }
+            />
+            <Route exact path="/about" element={<About />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </>
   );
 }
 
